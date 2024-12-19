@@ -6,6 +6,7 @@ type TCardMode = 'basic' | 'student' | 'advanced' | 'premium';
 
 @Component({
   selector: 'app-root',
+  standalone: true,
   imports: [ReactiveFormsModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
