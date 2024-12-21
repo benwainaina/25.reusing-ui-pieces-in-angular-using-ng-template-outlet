@@ -20,49 +20,49 @@
       @switch(selectedBackContent.value) { @case('basic') {
 
       <div class="wrapper__card__back__basic">
-        <div class="wrapper__card__back__motto">
-          <span class="wrapper__card__back__motto__label">motto</span>
-          <div class="wrapper__card__back__motto__divider"></div>
-          <div class="wrapper__card__back__motto__value">
-            You stop growing when you stop learning!
-          </div>
-        </div>
+        <ng-template
+          [ngTemplateOutlet]="motoTemplate"
+          [ngTemplateOutletContext]="{
+          label: 'Basic',
+          value: 'This is your motto as a basic user!',
+        }"
+        ></ng-template>
       </div>
 
       } @case('advanced') {
 
       <div class="wrapper__card__back__advanced">
-        <div class="wrapper__card__back__motto">
-          <span class="wrapper__card__back__motto__label">motto</span>
-          <div class="wrapper__card__back__motto__divider"></div>
-          <div class="wrapper__card__back__motto__value">
-            You stop growing when you stop learning!
-          </div>
-        </div>
-        <div class="wrapper__card__back__skills">
-          <div class="wrapper__card__back__skills__skill">Python</div>
-          <div class="wrapper__card__back__skills__skill">Django</div>
-          <div class="wrapper__card__back__skills__skill">Angular</div>
-          <div class="wrapper__card__back__skills__skill">React</div>
-        </div>
+        <ng-template
+          [ngTemplateOutlet]="motoTemplate"
+          [ngTemplateOutletContext]="{
+          label: 'Advanced',
+          value: 'This is your motto as an advanced user!',
+        }"
+        ></ng-template>
+
+        <ng-template
+          [ngTemplateOutlet]="skillsTemplate"
+          [ngTemplateOutletContext]="{
+            skills: ['Python', 'Django', 'Angular', 'React']
+          }"
+        ></ng-template>
       </div>
       } @case('premium') {
 
       <div class="wrapper__card__back__premium">
-        <div class="wrapper__card__back__motto">
-          <span class="wrapper__card__back__motto__label">motto</span>
-          <div class="wrapper__card__back__motto__divider"></div>
-          <div class="wrapper__card__back__motto__value">
-            You stop growing when you stop learning!
-          </div>
-        </div>
-        <div class="wrapper__card__back__skills">
-          <div class="wrapper__card__back__skills__skill">Python</div>
-          <div class="wrapper__card__back__skills__skill">Django</div>
-          <div class="wrapper__card__back__skills__skill">Angular</div>
-          <div class="wrapper__card__back__skills__skill">React</div>
-          <div class="wrapper__card__back__skills__skill">React Native</div>
-        </div>
+        <ng-template
+          [ngTemplateOutlet]="motoTemplate"
+          [ngTemplateOutletContext]="{
+          label: 'Premium',
+          value: 'This is your motto as a premium user!',
+        }"
+        ></ng-template>
+        <ng-template
+          [ngTemplateOutlet]="skillsTemplate"
+          [ngTemplateOutletContext]="{
+            skills: ['Python', 'Django', 'Angular', 'React Native']
+          }"
+        ></ng-template>
         <div class="wrapper__card__back__socials">
           <div>Github</div>
           <div>Twitter</div>
@@ -108,3 +108,22 @@
     </div>
   </div>
 </div>
+
+<!-- shared UI templates -->
+<ng-template #motoTemplate let-label="label" let-value="value">
+  <div class="wrapper__card__back__motto">
+    <span class="wrapper__card__back__motto__label">{{ label }}</span>
+    <div class="wrapper__card__back__motto__divider"></div>
+    <div class="wrapper__card__back__motto__value">
+      {{ value }}
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #skillsTemplate let-skills="skills">
+  <div class="wrapper__card__back__skills">
+    @for(skill of skills; track skill) {
+    <div class="wrapper__card__back__skills__skill">{{ skill }}</div>
+    }
+  </div>
+</ng-template>
